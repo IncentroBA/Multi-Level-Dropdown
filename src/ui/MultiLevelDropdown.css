@@ -1,0 +1,111 @@
+.multilevel-dropdown {
+  cursor: pointer;
+  display: inline-block;
+  min-width: 400px;
+  position: relative;
+  width: max-content;
+}
+
+.multilevel-dropdown .form-control {
+  display: flex;
+  justify-content: space-between;
+}
+
+.multilevel-dropdown:hover {
+  border: 0;
+  box-shadow: 0px 4px 25px 0 rgba(0, 0, 0, 0.15);
+}
+
+.multilevel-dropdown:hover .form-control .multilevel-dropdown__icon {
+  transform: rotate(180deg);
+}
+
+.multilevel-dropdown-content {
+  background-color: white;
+  border: solid 1px #D1D1D1;
+  bottom: 0;
+  box-shadow: 0px 4px 25px 0 rgba(0, 0, 0, 0.15);
+  display: none;
+  max-height: 189px;
+  overflow: auto;
+  position: absolute;
+  transform: translateY(100%);
+  width: 100%;
+  z-index: 4;
+}
+
+.multilevel-dropdown:hover .multilevel-dropdown-content {
+  display: block;
+}
+
+.multilevel-dropdown-content ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.multilevel-dropdown-content li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 15px;
+  text-decoration: none;
+  color: black;
+}
+
+.multilevel-dropdown-content li:hover {
+  background-color: #FAFAFA;
+}
+
+.sub-dropdown {
+  position: relative;
+}
+
+.sub-dropdown-content {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0px 4px 25px 0 rgba(0, 0, 0, 0.15);
+  display: none;
+  left: 100%;
+  min-width: 160px;
+  padding: 10px 0;
+  position: absolute;
+  top: 0;
+}
+
+.sub-dropdown:hover .sub-dropdown-content {
+  display: block;
+}
+
+li.multilevel-dropdown__back {
+  display: flex;
+  justify-content: space-between;
+}
+
+.multilevel-dropdown__icon {
+  height: 24px;
+  width: 24px;
+}
+
+
+.custom-input-container {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.custom-input-container input {
+  flex: 1;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.multilevel-dropdown-preview {
+  align-items: center;
+  background-color: white;
+  border-radius: 0;
+  border: solid 1px #c1c1c1;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+}
