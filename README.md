@@ -46,7 +46,7 @@ Note how the value for Option 2 points to the second level `submenu1`.
 
 ## Usage
 
-[step by step instructions]
+Just place on the page and configure according to above features and JSON structure.
 
 ## Development and contribution
 
