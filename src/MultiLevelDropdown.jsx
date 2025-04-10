@@ -4,6 +4,7 @@ import { createElement, useEffect, useState, useCallback, useMemo } from "react"
 export function MultiLevelDropdown({ DataJSON, placeholder, selectedOption }) {
     const [canRender, setCanRender] = useState(false);
     const [currentMenu, setCurrentMenu] = useState("main");
+    const [isOpen, setIsOpen] = useState(false);
     const [menuData, setMenuData] = useState(null);
     const [menuStack, setMenuStack] = useState([]);
     const [selectedValue, setSelectedValue] = useState();
@@ -56,7 +57,11 @@ export function MultiLevelDropdown({ DataJSON, placeholder, selectedOption }) {
     }
 
     return (
-        <div className="multilevel-dropdown form-group">
+        <div
+            className="multilevel-dropdown form-group"
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
+        >
             <div className="form-control">
                 <span>{selectedValue || placeholder}</span>
                 <div className="multilevel-dropdown__icon">
@@ -65,43 +70,48 @@ export function MultiLevelDropdown({ DataJSON, placeholder, selectedOption }) {
                     </svg>
                 </div>
             </div>
-            <div className="multilevel-dropdown-content" key={currentMenu}>
-                <ul>
-                    {menuStack.length > 0 && (
-                        <li onClick={goBack} className="multilevel-dropdown__back">
-                            <div className="multilevel-dropdown__icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="m15,17.29c.39-.39.39-1.02,0-1.41l-3.88-3.88,3.88-3.88c.39-.39.39-1.02,0-1.41-.39-.39-1.02-.39-1.41,0l-4.59,4.59c-.39.39-.39,1.02,0,1.41l4.59,4.59c.38.38,1.02.38,1.41,0Z" />
-                                </svg>
-                            </div>
-                            <span>{menuStack[menuStack.length - 1]?.label}</span>
-                        </li>
-                    )}
-                    {currentItems.map(item => (
-                        <li
-                            key={item.value}
-                            className={menuData[item.value] ? "sub-dropdown" : ""}
-                            onClick={() => {
-                                if (menuData[item.value]) {
-                                    navigateToSubmenu(item.value, item.label);
-                                } else {
-                                    setSelectedValue(item.label);
-                                    selectedOption.setValue(item.label);
-                                }
-                            }}
-                        >
-                            <span>{item.label}</span>
-                            {menuData[item.value] && (
+            {isOpen && (
+                <div className="multilevel-dropdown-content" key={currentMenu}>
+                    <ul>
+                        {menuStack.length > 0 && (
+                            <li onClick={goBack} className="multilevel-dropdown__back">
                                 <div className="multilevel-dropdown__icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path d="m9,6.71c-.39.39-.39,1.02,0,1.41l3.88,3.88-3.88,3.88c-.39.39-.39,1.02,0,1.41.39.39,1.02.39,1.41,0l4.59-4.59c.39-.39.39-1.02,0-1.41l-4.59-4.59c-.38-.38-1.02-.38-1.41,0Z" />
+                                        <path d="m15,17.29c.39-.39.39-1.02,0-1.41l-3.88-3.88,3.88-3.88c.39-.39.39-1.02,0-1.41-.39-.39-1.02-.39-1.41,0l-4.59,4.59c-.39.39-.39,1.02,0,1.41l4.59,4.59c.38.38,1.02.38,1.41,0Z" />
                                     </svg>
                                 </div>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-            </div>
+                                <span>{menuStack[menuStack.length - 1]?.label}</span>
+                            </li>
+                        )}
+                        {currentItems.map(item => (
+                            <li
+                                key={item.value}
+                                className={menuData[item.value] ? "sub-dropdown" : ""}
+                                onClick={() => {
+                                    if (menuData[item.value]) {
+                                        navigateToSubmenu(item.value, item.label);
+                                    } else {
+                                        setSelectedValue(item.label);
+                                        selectedOption.setValue(item.label);
+                                        setIsOpen(false);
+                                        setCurrentMenu("main");
+                                        setMenuStack([]);
+                                    }
+                                }}
+                            >
+                                <span>{item.label}</span>
+                                {menuData[item.value] && (
+                                    <div className="multilevel-dropdown__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path d="m9,6.71c-.39.39-.39,1.02,0,1.41l3.88,3.88-3.88,3.88c-.39.39-.39,1.02,0,1.41.39.39,1.02.39,1.41,0l4.59-4.59c.39-.39.39-1.02,0-1.41l-4.59-4.59c-.38-.38-1.02-.38-1.41,0Z" />
+                                        </svg>
+                                    </div>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </div>
     );
 }
