@@ -97,7 +97,11 @@ export function MultiLevelDropdown({ DataJSON, displaySubmenuString, placeholder
                                         const currentPath = menuStack.map(item => item.label).join(" > ");
                                         setSubmenuPath(currentPath);
                                         setSelectedValue(item.label);
-                                        selectedOption.setValue(item.label);
+                                        selectedOption.setValue(
+                                            displaySubmenuString && currentPath
+                                                ? `${currentPath} > ${item.label}`
+                                                : item.label
+                                        );
                                         setIsOpen(false);
                                         setCurrentMenu("main");
                                         setMenuStack([]);

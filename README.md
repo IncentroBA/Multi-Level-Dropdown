@@ -11,6 +11,8 @@ Allocate a Selected option `attribute(String)` that the widget can use to write 
 
 Optionally you can configure a placeholder `String` for the widget to display
 
+Output submenu value `Boolean` (Optional): Also pass the submenu value to the selected option attribute.
+
 ### Demo Data JSON
 
 ```
