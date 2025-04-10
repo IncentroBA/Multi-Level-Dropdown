@@ -1,11 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="incentro.multileveldropdown.MultiLevelDropdown" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
-        supportedPlatform="Web"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget
+    id="incentro.multileveldropdown.MultiLevelDropdown"
+    pluginWidget="true"
+    needsEntityContext="true"
+    offlineCapable="true"
+    supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd"
+>
     <name>Multi Level Dropdown</name>
-    <description>Render a dropdown widget from a multilevel JSON structure with multiple levels of hierarchy. The selected value will be stored in a String attribute.</description>
-    <icon/>
+    <description>
+        Render a dropdown widget from a multilevel JSON structure with multiple levels of hierarchy. The selected value
+        will be stored in a String attribute.
+    </description>
+    <icon />
     <properties>
         <propertyGroup caption="General">
             <property key="DataJSON" type="attribute" required="false">
@@ -18,17 +27,22 @@
 
             <property key="placeholder" type="string" required="false">
                 <caption>Placeholder</caption>
-                <description></description>
+                <description />
             </property>
 
             <property key="selectedOption" type="attribute" required="true">
                 <caption>Selected option</caption>
                 <description>Save the selected option inside a string attribute.</description>
                 <attributeTypes>
-                    <attributeType name="String"/>
+                    <attributeType name="String" />
                 </attributeTypes>
             </property>
-            <systemProperty key="Label"/>
+
+            <property key="displaySubmenuString" type="boolean" defaultValue="false">
+                <caption>Output submenu value</caption>
+                <description>Also pass the submenu value to the selected option attribute.</description>
+            </property>
+            <systemProperty key="Label" />
         </propertyGroup>
     </properties>
 </widget>
