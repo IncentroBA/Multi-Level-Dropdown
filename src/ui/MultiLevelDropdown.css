@@ -3,12 +3,23 @@
   display: inline-block;
   min-width: 400px;
   position: relative;
-  width: max-content;
 }
 
 .multilevel-dropdown .form-control {
   display: flex;
   justify-content: space-between;
+}
+
+.multilevel-dropdown .form-control span {
+  --max-height: calc(1 * var(--font-size, 16px) * var(--line-height, 1.5));
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  line-clamp: 1;
+  max-height: var(--max-height);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .multilevel-dropdown:hover {
@@ -98,6 +109,24 @@ li.multilevel-dropdown__back {
   padding: 4px 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+
+@media (hover: none) and (pointer: coarse),
+(pointer: fine) and (-moz-touch-enabled: 1) {
+  .multilevel-dropdown:hover .multilevel-dropdown-content {
+    display: none;
+  }
+
+  .multilevel-dropdown .multilevel-dropdown-content.is-open {
+    display: block;
+  }
+
+  /* Improve touch targets */
+  .multilevel-dropdown-content li {
+    min-height: 44px;
+    padding: 12px 16px;
+  }
 }
 
 .multilevel-dropdown-preview {

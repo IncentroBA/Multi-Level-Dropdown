@@ -10,6 +10,10 @@ export function MultiLevelDropdown({ DataJSON, displaySubmenuString, placeholder
     const [selectedValue, setSelectedValue] = useState();
     const [submenuPath, setSubmenuPath] = useState("");
 
+    const isTouchDevice = () => {
+        return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    };
+
     const currentItems = useMemo(() => {
         if (!menuData || !currentMenu) {
             return [];
@@ -58,8 +62,14 @@ export function MultiLevelDropdown({ DataJSON, displaySubmenuString, placeholder
     }
 
     return (
-        <div className="multilevel-dropdown" onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
-            <div className="form-control">
+        <div
+            className="multilevel-dropdown"
+            {...(!isTouchDevice() && {
+                onMouseEnter: () => setIsOpen(true),
+                onMouseLeave: () => setIsOpen(false)
+            })}
+        >
+            <div className="form-control" onClick={() => isTouchDevice() && setIsOpen(!isOpen)}>
                 <span>
                     {selectedValue
                         ? displaySubmenuString && submenuPath
@@ -74,7 +84,7 @@ export function MultiLevelDropdown({ DataJSON, displaySubmenuString, placeholder
                 </div>
             </div>
             {isOpen && (
-                <div className="multilevel-dropdown-content" key={currentMenu}>
+                <div className={`multilevel-dropdown-content ${isOpen ? "is-open" : ""}`} key={currentMenu}>
                     <ul>
                         {menuStack.length > 0 && (
                             <li onClick={goBack} className="multilevel-dropdown__back">
